@@ -9,6 +9,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - target: x86_64-windows-gnu
+            os: windows-latest
+            suffix: ".exe"
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             suffix: ""
@@ -27,9 +30,14 @@ jobs:
       - name: Move binary to root
         run: mv target/${{ matrix.target }}/release/planetary${{ matrix.suffix }} planetary${{ matrix.suffix }}
       
-      - name: Generate archive
+      - name: Generate archive (unix)
+        if: ${{ matrix.target }} != "x86_64-windows-gnu"
         run: tar -czvf planetary-${{ matrix.target }}.tar.gz planetary${{ matrix.suffix }}
-        
+      
+      - name: Generate archive (windows)
+        if: ${{ matrix.target }} == "x86_64-windows-gnu"
+        run: Compress-Archive planetary${{ matrix.suffix }} planetary-${{ matrix.target }}.zip 
+      
       - uses: actions/upload-artifact@v3
         with:
           name: planetary-${{ matrix.target }}.tar.gz
