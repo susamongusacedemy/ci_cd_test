@@ -28,10 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build binary for production
-        run: cargo build --release
+        run: cargo build --release --target ${{ matrix.target }}
         
       - uses: actions/upload-artifact@v3
         with:
           name: planetary-${{ matrix.target }}${{ matrix.suffix }}
-          path: bin/target/release/planetary${{ matrix.suffix }}
+          path: bin/target/${{ matrix.target }}/release/planetary${{ matrix.suffix }}
       
