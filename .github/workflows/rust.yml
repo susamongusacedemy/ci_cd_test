@@ -12,12 +12,15 @@ jobs:
           - target: x86_64-pc-windows-gnu
             os: windows-latest
             archive: zip
+            suffix: ".exe"
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             archive: tar.gz tar.xz tar.zst
+            suffix: ""
           - target: x86_64-apple-darwin
             os: macos-latest
             archive: zip
+            suffix: ""
     runs-on: ${{ matrix.os }} 
     defaults:
       run:
@@ -27,14 +30,8 @@ jobs:
       - name: Build binary for production
         run: cargo build --release
         
-      - name: List directory
-        run: ls -lah target
-        
-      - name: List directory
-        run: ls -lah target/release
-        
       - uses: actions/upload-artifact@v3
         with:
-          name: planetary-${{ matrix.target }}
-          path: bin/target/release/planetary
+          name: planetary-${{ matrix.target }}${{ matrix.suffix }}
+          path: bin/target/release/planetary${{ matrix.suffix }}
       
