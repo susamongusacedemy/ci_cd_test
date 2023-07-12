@@ -27,6 +27,12 @@ jobs:
       - name: Build binary for production
         run: cargo build --release
         
+      - name: List directory
+        run: ls -lah target
+        
+      - name: List directory
+        run: ls -lah target/release
+        
       - uses: actions/upload-artifact@v3
         with:
           name: planetary-${{ matrix.target }}
