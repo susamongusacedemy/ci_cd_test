@@ -36,5 +36,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: planetary-${{ matrix.target }}
-          path: ./target/release/planetary
+          path: bin/target/release/planetary
       
