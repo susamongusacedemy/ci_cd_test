@@ -12,12 +12,15 @@ jobs:
           - target: x86_64-pc-windows-gnu
             os: windows-latest
             suffix: ".exe"
+            archive_suffix: ".zip"
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             suffix: ""
+            archive_suffix: ".tar.gz"
           - target: x86_64-apple-darwin
             os: macos-latest
             suffix: ""
+            archive_suffix: ".tar.gz"
     runs-on: ${{ matrix.os }} 
     defaults:
       run:
@@ -40,6 +43,6 @@ jobs:
       
       - uses: actions/upload-artifact@v3
         with:
-          name: planetary-${{ matrix.target }}.tar.gz
-          path: bin/planetary-${{ matrix.target }}.tar.gz
+          name: planetary-${{ matrix.target }}${{ matrix.archive_suffix }}
+          path: bin/planetary-${{ matrix.target }}${{ matrix.archive_suffix }}
       
