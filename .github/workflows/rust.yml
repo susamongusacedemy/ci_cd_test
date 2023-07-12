@@ -24,6 +24,6 @@ jobs:
         working-directory: bin
     steps:
       - uses: actions/checkout@v3
-      - name: List current working directory
-        run: ls -lah
+      - name: Build binary for production
+        run: cargo build --release
       
