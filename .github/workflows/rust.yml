@@ -25,7 +25,7 @@ jobs:
         run: cargo build --release --target ${{ matrix.target }}
       
       - name: Zipping up binary
-        run: tar -czvf planetary-${{ matrix.target }}.tar.gz bin/target/${{ matrix.target }}/release/planetary${{ matrix.suffix }}
+        run: tar -czvf planetary-${{ matrix.target }}.tar.gz target/${{ matrix.target }}/release/planetary${{ matrix.suffix }}
         
       - uses: actions/upload-artifact@v3
         with:
