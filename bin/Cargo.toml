@@ -1,5 +1,5 @@
 [package]
-name = "planetary_bin"
+name = "planetary"
 version = "0.1.0"
 edition = "2021"
 
